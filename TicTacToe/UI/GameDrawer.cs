@@ -10,9 +10,16 @@ namespace TicTacToe.UI
             if (data is not TicTacToeGame game) throw new ArgumentException($"Неверный тип параметра для {nameof(DrawGame)}", nameof(data));
             switch (e.PropertyName)
             {
-                case nameof(TicTacToeGame.Winner):
+                case nameof(TicTacToeGame.Finished):
                     DrawGame(game);
-                    Console.WriteLine($"Победил {game.Winner}!");
+                    if (game.Winner != null)
+                    {
+                        Console.WriteLine($"Победил {game.Winner}!");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Всё поле заполнено");
+                    }
                     break;
                 case nameof(TicTacToeGame.CurrentMoveCharacter):
                     DrawGame(game);

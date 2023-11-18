@@ -13,22 +13,7 @@ namespace TicTacToe.Domain
     {
         public GameCharacter?[,] Field { get; private set; }
 
-        private GameCharacter? _winner;
-        public GameCharacter? Winner
-        {
-            get
-            {
-                return _winner;
-            }
-            private set
-            {
-                if (value != _winner)
-                {
-                    _winner = value;
-                    OnPropertyChanged(nameof(Winner));
-                }
-            }
-        }
+        public GameCharacter? Winner { get; private set; }
 
         private GameCharacter? _currentMoveCharacter;
         public GameCharacter? CurrentMoveCharacter
@@ -46,6 +31,24 @@ namespace TicTacToe.Domain
                 }
             }
         }
+
+        private bool _finished;
+        public bool Finished
+        {
+            get
+            {
+                return _finished;
+            }
+            private set
+            {
+                if (value != _finished)
+                {
+                    _finished = value;
+                    OnPropertyChanged(nameof(Finished));
+                }
+            }
+        }
+
         public int Size { get; }
 
         public TicTacToeGame(int size)
@@ -69,6 +72,7 @@ namespace TicTacToe.Domain
             if (gameFinished)
             {
                 Winner = winner;
+                Finished = true;
             }
             else
             {
@@ -96,6 +100,23 @@ namespace TicTacToe.Domain
         private bool GameIsFinished(Point point, out GameCharacter? winner)
         {
             winner = default;
+
+            // full field
+            bool allCellsFilled = true;
+            for (int i = 0; i < Size; i++)
+            {
+                for (int j = 0; j < Size; j++)
+                {
+                    if (Field[i, j] == null)
+                    {
+                        allCellsFilled = false;
+                        break;
+                    }
+
+                }
+            }
+
+            if (allCellsFilled) return true;
 
             // row
             for (int i = 0; i < Size; i++)
