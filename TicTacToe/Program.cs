@@ -17,7 +17,7 @@ namespace TicTacToe
 
             game.Init();
 
-            while (true)
+            while (game.Winner is null)
             {
                 var input = Console.ReadLine();
                 if (input is null || !input.Contains(','))
