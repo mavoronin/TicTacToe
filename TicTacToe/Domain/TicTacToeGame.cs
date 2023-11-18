@@ -112,7 +112,7 @@ namespace TicTacToe.Domain
             // column
             for (int i = 0; i < Size; i++)
             {
-                if (Field[i, point.Y] !=CurrentMoveCharacter) break;
+                if (Field[i, point.Y] != CurrentMoveCharacter) break;
 
                 if (i == Size - 1)
                 {
@@ -138,7 +138,7 @@ namespace TicTacToe.Domain
             }
 
             // secondary
-            if (point.X == Size - point.Y)
+            if (point.X == Size - 1 - point.Y)
             {
                 for (int i = 0; i < Size; i++)
                 {
